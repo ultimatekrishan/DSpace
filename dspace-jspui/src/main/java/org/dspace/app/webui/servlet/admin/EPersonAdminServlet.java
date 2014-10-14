@@ -115,6 +115,7 @@ public class EPersonAdminServlet extends DSpaceServlet
             String netid = request.getParameter("netid");
 	    String password = request.getParameter("password");
 	    String passwordConfirm = request.getParameter("password_confirm");
+	    Boolean epersonSuccess = false;
 
             if (!newEmail.equals(oldEmail))
             {
@@ -160,16 +161,31 @@ public class EPersonAdminServlet extends DSpaceServlet
                                     .equals("true"));
 		    //Check it's there and long enough
 		    //Check the two passwords entered match
+                    e.update();
 		    if((password != null) &&
 		       (password.length() > 6) &&
 		       (password.equals(passwordConfirm))) {
 			//Everything OK so far, Change the password
 			e.setPassword(password);
-
+                    	e.update();
+		    } else {
+                    	// not unique - send error message & let try again
+            		try
+            		{
+                		e.delete();
+            		}
+            		catch (EPersonDeletionException ex)
+            		{
+                		request.setAttribute("eperson", e);
+                		request.setAttribute("tableList", ex.getTables());
+                		JSPManager.showJSP(request, response,
+                        		"/dspace-admin/eperson-deletion-error.jsp");
+            		}
+            		request.setAttribute("eperson_create_ko", Boolean.TRUE);
+                    	showMain(context, request, response);
+                    	context.complete();
+			return;
 		    }
-
-                    e.update();
-
                     if (button.equals("submit_resetpassword"))
                     {                        
                         try
@@ -183,7 +199,9 @@ public class EPersonAdminServlet extends DSpaceServlet
                                             "/dspace-admin/eperson-resetpassword-error.jsp");
                             return;
                         }
-                    }
+                    } else {
+            		request.setAttribute("eperson_create_ok", Boolean.TRUE);
+		    }
                     showMain(context, request, response);
                     context.complete();
                 }
@@ -252,6 +270,7 @@ public class EPersonAdminServlet extends DSpaceServlet
                         return;
                     }                   
                 }
+		
                 
                 showMain(context, request, response);
                 context.complete();

@@ -35,6 +35,8 @@
 
 <%
    boolean noEPersonSelected = (request.getAttribute("no_eperson_selected") != null);
+   boolean epersonCreatedOk = (request.getAttribute("eperson_create_ok") != null);
+   boolean epersonCreatedNotOk = (request.getAttribute("eperson_create_ko") != null);
    boolean resetPassword = (request.getAttribute("reset_password") != null);
    boolean loginAs = ConfigurationManager.getBooleanProperty("webui.user.assumelogin", false);
 %>
@@ -65,7 +67,19 @@
 	{ %><p class="alert alert-success">
 	     <fmt:message key="jsp.dspace-admin.eperson-main.ResetPassword.success_notice"/>
 	   </p>
-<%  } %>    
+<%  } %>
+<% if (epersonCreatedOk)
+	{ %><p class="alert alert-success">
+	     <fmt:message key="jsp.dspace-admin.eperson-main.EpersonAdd.success_notice"/>
+	   </p>
+<%  } %>
+<% if (epersonCreatedNotOk)
+	{ %><p class="alert alert-success">
+	     <fmt:message key="jsp.dspace-admin.eperson-main.EpersonAdd.failure_notice"/>
+	   </p>
+
+<% } %>
+    
     <form name="epersongroup" method="post" action="">    
 			<div class="row">
             <%-- <input type="submit" name="submit_add" value="Add EPerson..."> --%>

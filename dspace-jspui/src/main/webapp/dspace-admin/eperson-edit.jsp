@@ -64,6 +64,7 @@
     String netid = eperson.getNetid();
     String language     = eperson.getMetadata("language");
     boolean emailExists = (request.getAttribute("email_exists") != null);
+    boolean invalidPassword = (request.getAttribute("invalid_password") != null);
 
     boolean ldap_enabled = ConfigurationManager.getBooleanProperty("authentication-ldap", "enable");
 %>
@@ -88,6 +89,11 @@
 <% if (emailExists)
 	{ %><p class="alert alert-warning">
 	     <fmt:message key="jsp.dspace-admin.eperson-edit.emailexists"/>
+	   </p>
+<%  } 
+   if (invalidPassword)
+	{ %><p class="alert alert-warning">
+	     <fmt:message key="jsp.dspace-admin.eperson-edit.invalidpassword"/>
 	   </p>
 <%  } %>
 
