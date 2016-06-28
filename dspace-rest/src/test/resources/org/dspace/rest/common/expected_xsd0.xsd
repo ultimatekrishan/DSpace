@@ -17,6 +17,11 @@
 
   <xs:element name="status" type="status"/>
 
+<<<<<<< HEAD
+=======
+  <xs:element name="user" type="user"/>
+
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
   <xs:complexType name="bitstream">
     <xs:complexContent>
       <xs:extension base="dSpaceObject">
@@ -41,9 +46,15 @@
       <xs:element name="link" type="xs:string"/>
       <xs:element name="expand" type="xs:string" maxOccurs="unbounded"/>
       <xs:element name="handle" type="xs:string" minOccurs="0"/>
+<<<<<<< HEAD
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="type" type="xs:string" minOccurs="0"/>
       <xs:element name="UUID" type="xs:string" minOccurs="0"/>
+=======
+      <xs:element name="id" type="xs:int" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="type" type="xs:string" minOccurs="0"/>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
     </xs:sequence>
   </xs:complexType>
 
@@ -59,10 +70,17 @@
     <xs:sequence>
       <xs:element name="action" type="action" minOccurs="0"/>
       <xs:element name="endDate" type="xs:dateTime" minOccurs="0"/>
+<<<<<<< HEAD
       <xs:element name="epersonId" type="xs:string" minOccurs="0"/>
       <xs:element name="groupId" type="xs:string" minOccurs="0"/>
       <xs:element name="id" type="xs:int" minOccurs="0"/>
       <xs:element name="resourceId" type="xs:string" minOccurs="0"/>
+=======
+      <xs:element name="epersonId" type="xs:int" minOccurs="0"/>
+      <xs:element name="groupId" type="xs:int" minOccurs="0"/>
+      <xs:element name="id" type="xs:int" minOccurs="0"/>
+      <xs:element name="resourceId" type="xs:int" minOccurs="0"/>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
       <xs:element name="resourceType" type="xs:string" minOccurs="0"/>
       <xs:element name="rpDescription" type="xs:string" minOccurs="0"/>
       <xs:element name="rpName" type="xs:string" minOccurs="0"/>
@@ -134,12 +152,26 @@
 
   <xs:complexType name="status">
     <xs:sequence>
+<<<<<<< HEAD
       <xs:element name="apiVersion" type="xs:string" minOccurs="0"/>
+=======
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
       <xs:element name="authenticated" type="xs:boolean"/>
       <xs:element name="email" type="xs:string" minOccurs="0"/>
       <xs:element name="fullname" type="xs:string" minOccurs="0"/>
       <xs:element name="okay" type="xs:boolean"/>
+<<<<<<< HEAD
       <xs:element name="sourceVersion" type="xs:string" minOccurs="0"/>
+=======
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="user">
+    <xs:sequence>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="password" type="xs:string" minOccurs="0"/>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
     </xs:sequence>
   </xs:complexType>
 

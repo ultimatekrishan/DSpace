@@ -283,6 +283,9 @@ public class CollectionsResource extends Resource
                         writeStats(dspaceItem, UsageEvent.Action.VIEW, user_ip, user_agent, xforwardedfor,
                                 headers, request, context);
                     }
+                } else {
+                    //Advance the iterator to offset.
+                    dspaceItems.nextID();
                 }
             }
 
@@ -364,6 +367,14 @@ public class CollectionsResource extends Resource
                     itemService.addMetadata(context, dspaceItem, data[0], data[1], data[2], entry.getLanguage(), entry.getValue());
                 }
             }
+<<<<<<< HEAD
+=======
+            workspaceItem.update();
+
+            // Index item to browse.
+            org.dspace.browse.IndexBrowse browse = new org.dspace.browse.IndexBrowse(context);
+            browse.indexItem(dspaceItem);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
             log.trace("Installing item to collection(id=" + collectionId + ").");
             dspaceItem = installItemService.installItem(context, workspaceItem);

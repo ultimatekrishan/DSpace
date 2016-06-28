@@ -14,12 +14,21 @@ import java.util.*;
 
 import org.apache.log4j.Logger;
 import org.dspace.authorize.AuthorizeException;
+<<<<<<< HEAD
 import org.dspace.content.*;
 import org.dspace.content.factory.ContentServiceFactory;
 import org.dspace.content.service.BitstreamService;
 import org.dspace.content.service.BundleService;
 import org.dspace.content.service.SiteService;
 import org.dspace.content.service.WorkspaceItemService;
+=======
+import org.dspace.content.Bitstream;
+import org.dspace.content.Bundle;
+import org.dspace.content.DSpaceObject;
+import org.dspace.content.Item;
+import org.dspace.content.Site;
+import org.dspace.content.WorkspaceItem;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.dspace.event.Consumer;
@@ -128,10 +137,16 @@ public class RDFConsumer implements Consumer
                 List<Item> items = b.getItems();
                 for (Item i : items)
                 {
+<<<<<<< HEAD
                     if (workspaceItemService.findByItem(ctx, i) != null
                             || workflowItemService.findByItem(ctx, i) != null)
                     {
                         log.debug("Ignoring Item " + i.getID() + " as a corresponding workspace or workflow item exists.");
+=======
+                    if (WorkspaceItem.findByItem(ctx, i) != null)
+                    {
+                        log.debug("Ignoring Item " + i.getID() + " as a corresponding workspace item exists.");
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                         continue;
                     }
                     DSOIdentifier id = new DSOIdentifier(i, ctx);
@@ -179,12 +194,20 @@ public class RDFConsumer implements Consumer
             List<Item> items = bundle.getItems();
             for (Item i : items)
             {
+<<<<<<< HEAD
                 if (workspaceItemService.findByItem(ctx, i) != null
                             || workflowItemService.findByItem(ctx, i) != null)
                     {
                         log.debug("Ignoring Item " + i.getID() + " as a corresponding workspace or workflow item exists.");
                         continue;
                     }
+=======
+                if (WorkspaceItem.findByItem(ctx, i) != null)
+                {
+                    log.debug("Ignoring Item " + i.getID() + " as a corresponding workspace item exists.");
+                    continue;
+                }
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                 DSOIdentifier id = new DSOIdentifier(i, ctx);
                 if (!this.toDelete.contains(id) && !this.toConvert.contains(id))
                 {
@@ -255,6 +278,7 @@ public class RDFConsumer implements Consumer
             // ignore unfinished submissions here. Every unfinished submission
             // has an workspace item. The item flag "in_archive" doesn't help us
             // here as this is also set to false if a newer version was submitted.
+<<<<<<< HEAD
             if (dso instanceof Item)
             {
                 if (workspaceItemService.findByItem(ctx, (Item) dso) != null
@@ -263,6 +287,13 @@ public class RDFConsumer implements Consumer
                     log.debug("Ignoring Item " + dso.getID() + " as a corresponding workspace or workflow item exists.");
                     return;
                 }
+=======
+            if (dso instanceof Item
+                    && WorkspaceItem.findByItem(ctx, (Item) dso) != null)
+            {
+                log.debug("Ignoring Item " + dso.getID() + " as a corresponding workspace item exists.");
+                return;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             }
 
             DSOIdentifier id = new DSOIdentifier(dso, ctx);

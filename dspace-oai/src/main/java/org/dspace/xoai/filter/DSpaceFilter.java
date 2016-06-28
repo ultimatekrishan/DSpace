@@ -14,7 +14,11 @@ import com.lyncode.xoai.dataprovider.xml.xoaiconfig.parameters.ParameterMap;
 import org.dspace.core.Context;
 import org.dspace.xoai.data.DSpaceItem;
 import org.dspace.xoai.filter.results.SolrFilterResult;
+<<<<<<< HEAD
 import org.dspace.xoai.services.api.FieldResolver;
+=======
+import org.dspace.xoai.services.api.database.FieldResolver;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
 /**
  * 
@@ -31,6 +35,10 @@ public abstract class DSpaceFilter implements Filter
     /** The oai context */
     protected Context context;
 
+<<<<<<< HEAD
+=======
+    public abstract DatabaseFilterResult buildDatabaseQuery(Context context);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
     public abstract SolrFilterResult buildSolrQuery();
     public abstract boolean isShown(DSpaceItem item);
 

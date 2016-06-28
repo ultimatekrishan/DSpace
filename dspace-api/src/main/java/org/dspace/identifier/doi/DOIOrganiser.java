@@ -192,10 +192,18 @@ public class DOIOrganiser {
 
         if (line.hasOption('s'))
         {
+<<<<<<< HEAD
 
             try {
                 List<DOI> dois = doiService.getDOIsByStatus(context, Arrays.asList(DOIIdentifierProvider.TO_BE_RESERVED));
                 if (0 == dois.size())
+=======
+            TableRowIterator it = organiser
+                                    .getDOIsByStatus(DOIIdentifierProvider.TO_BE_RESERVED);
+           
+            try { 
+                if (!it.hasNext()) 
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                 {
                     System.err.println("There are no objects in the database "
                             + "that could be reserved.");
@@ -232,6 +240,7 @@ public class DOIOrganiser {
         
         if (line.hasOption('u'))
         {
+<<<<<<< HEAD
 
             try {
                 List<DOI> dois = doiService.getDOIsByStatus(context, Arrays.asList(
@@ -239,6 +248,15 @@ public class DOIOrganiser {
                         DOIIdentifierProvider.UPDATE_RESERVED,
                         DOIIdentifierProvider.UPDATE_REGISTERED));
                 if (0 == dois.size())
+=======
+            TableRowIterator it = organiser.getDOIsByStatus(
+                    DOIIdentifierProvider.UPDATE_BEFORE_REGISTRATION,
+                    DOIIdentifierProvider.UPDATE_RESERVED,
+                    DOIIdentifierProvider.UPDATE_REGISTERED);
+           
+            try { 
+                if (!it.hasNext()) 
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                 {
                     System.err.println("There are no objects in the database "
                             + "whose metadata needs an update.");

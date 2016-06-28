@@ -38,6 +38,7 @@
     </description>
   </context-param>
   
+<<<<<<< HEAD
    <!-- 
    Listener to initialise DSpace configuration and clean up the application 
    -->
@@ -47,6 +48,14 @@
        </listener-class>
     </listener>
     <listener>
+=======
+   <!--
+       DSpace Kernel startup listener. This listener is in charge of initializing/starting the
+       DSpace Kernel. It MUST be listed BEFORE any other DSpace listeners, as DSpace services
+       will not function until the Kernel is initialized.
+   --> 
+   <listener>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
       <listener-class>
          org.dspace.servicemanager.servlet.DSpaceKernelServletContextListener
       </listener-class>

@@ -1002,8 +1002,18 @@ public class DatabaseUtils
     /**
      * Get the Database Schema Name in use by this Connection, so that it can
      * be used to limit queries in other methods (e.g. tableExists()).
+<<<<<<< HEAD
      *
      * @param connection
+=======
+     * <P>
+     * NOTE: Once we upgrade to using Apache Commons DBCP / Pool version 2.0,
+     * this method WILL BE REMOVED in favor of java.sql.Connection's new
+     * "getSchema()" method.
+     * http://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html#getSchema()
+     * 
+     * @param connection 
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
      *            Current Database Connection
      * @return Schema name as a string, or "null" if cannot be determined or unspecified
      */
@@ -1011,6 +1021,7 @@ public class DatabaseUtils
             throws SQLException
     {
         String schema = null;
+<<<<<<< HEAD
         
         // Try to get the schema from the DB connection itself.
         // As long as the Database driver supports JDBC4.1, there should be a getSchema() method
@@ -1035,11 +1046,25 @@ public class DatabaseUtils
             String dbType = getDbType(connection);
 
             if(dbType.equals(DBMS_POSTGRES))
+=======
+        DatabaseMetaData meta = connection.getMetaData();
+        
+        // Check the configured "db.schema" FIRST for the value configured there
+        schema = DatabaseManager.canonicalize(ConfigurationManager.getProperty("db.schema"));
+        
+        // If unspecified, determine "sane" defaults based on DB type
+        if(StringUtils.isBlank(schema))
+        {
+            String dbType = DatabaseManager.findDbKeyword(meta);
+        
+            if(dbType.equals(DatabaseManager.DBMS_POSTGRES))
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             {
                 // For PostgreSQL, the default schema is named "public"
                 // See: http://www.postgresql.org/docs/9.0/static/ddl-schemas.html
                 schema = "public";
             }
+<<<<<<< HEAD
             else if (dbType.equals(DBMS_ORACLE))
             {
                 // For Oracle, default schema is actually the user account
@@ -1051,6 +1076,18 @@ public class DatabaseUtils
                 schema = null;
         }
 
+=======
+            else if (dbType.equals(DatabaseManager.DBMS_ORACLE))
+            {
+                // For Oracle, default schema is actually the user account
+                // See: http://stackoverflow.com/a/13341390
+                schema = meta.getUserName();
+            }
+            else
+                schema = null;
+        }
+        
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         return schema;
     }
 

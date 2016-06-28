@@ -86,17 +86,17 @@
         </param-value>
     </context-param>
 
-    <listener>
-        <listener-class>org.dspace.app.util.DSpaceContextListener</listener-class>
-    </listener>
-
-    <!-- kernel start listener (from impl)
-        The following listener can be used instead of the filter below, it is simpler, cleaner
-        and eliminates the need for a DSpaceKernelServletFilter filter to be involved with the
-        request cycle.
+    <!-- 
+       DSpace Kernel startup listener. This listener is in charge of initializing/starting the
+       DSpace Kernel. It MUST be listed BEFORE any other DSpace listeners, as DSpace services
+       will not function until the Kernel is initialized.
     -->
     <listener>
         <listener-class>org.dspace.servicemanager.servlet.DSpaceKernelServletContextListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.dspace.app.util.DSpaceContextListener</listener-class>
     </listener>
     
     <listener>
@@ -105,9 +105,13 @@
         </listener-class>
     </listener>
 
+<<<<<<< HEAD
     <listener>
         <listener-class>org.dspace.app.util.DSpaceWebappListener</listener-class>
     </listener>
 
 
 </web-app>
+=======
+</web-app>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4

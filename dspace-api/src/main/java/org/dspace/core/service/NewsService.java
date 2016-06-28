@@ -7,6 +7,7 @@
  */
 package org.dspace.core.service;
 
+<<<<<<< HEAD
 /**
  * Encapsulate access to the news texts.
  *
@@ -49,4 +50,8 @@ public interface NewsService {
      * 				if the newsName is valid
      */
     public boolean validate(String newsName);
+=======
+public interface NewsService {
+	boolean validate(String newsName);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 }

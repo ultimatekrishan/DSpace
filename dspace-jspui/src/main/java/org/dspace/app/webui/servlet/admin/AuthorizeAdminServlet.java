@@ -7,7 +7,22 @@
  */
 package org.dspace.app.webui.servlet.admin;
 
+<<<<<<< HEAD
 import org.apache.commons.lang.time.DateUtils;
+=======
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.time.DateUtils;
+
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.dspace.app.util.AuthorizeUtil;
 import org.dspace.app.webui.servlet.DSpaceServlet;
 import org.dspace.app.webui.util.JSPManager;
@@ -508,11 +523,19 @@ public class AuthorizeAdminServlet extends DSpaceServlet
         {
             int policyId = UIUtil.getIntParameter(request, "policy_id");
             int actionId = UIUtil.getIntParameter(request, "action_id");
+<<<<<<< HEAD
             UUID groupId = UIUtil.getUUIDParameter(request, "group_id");
             UUID collectionId = UIUtil
                     .getUUIDParameter(request, "collection_id");
             UUID communityId = UIUtil.getUUIDParameter(request, "community_id");
             UUID itemId = UIUtil.getUUIDParameter(request, "item_id");
+=======
+            int groupId = UIUtil.getIntParameter(request, "group_id");
+            int collectionId = UIUtil
+                    .getIntParameter(request, "collection_id");
+            int communityId = UIUtil.getIntParameter(request, "community_id");
+            int itemId = UIUtil.getIntParameter(request, "item_id");
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             Date startDate = null;
             try {
                 startDate = DateUtils.parseDate(request.getParameter("policy_start_date"),
@@ -613,7 +636,11 @@ public class AuthorizeAdminServlet extends DSpaceServlet
                 // delete previously set dates.
                 policy.setStartDate(startDate);
                 policy.setEndDate(endDate);
+<<<<<<< HEAD
                 resourcePolicyService.update(c, policy);
+=======
+                policy.update();
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
                 // show edit form!
                 prepItemEditForm(c, request, item);

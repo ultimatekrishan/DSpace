@@ -423,6 +423,7 @@
                     </table>
                 </div>
       
+<<<<<<< HEAD
                 <div class="resumable-files">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -530,6 +531,94 @@
                     });
                 </script>
             <% } %>
+=======
+      <script>
+        var r = new Resumable({
+            target:'submit',
+            chunkSize:1024*1024,
+            simultaneousUploads:1,
+            testChunks: true,
+            throttleProgressCallbacks:1,
+            method: "multipart",
+            <%
+            if (subInfo.isInWorkflow())
+            {
+            %>
+                query:{workflow_id:'<%= subInfo.getSubmissionItem().getID()%>'}
+            <%
+            } else {
+            %>
+                query:{workspace_item_id:'<%= subInfo.getSubmissionItem().getID()%>'}
+            <%}%>
+          });
+        // Resumable.js isn't supported, fall back on a different method
+
+        if(r.support) {
+          // Show a place for dropping/selecting files
+          $('.resumable-error').hide();
+          $('#simple-upload').hide();
+          $('.resumable-drop').show();
+          $('#resumable-upload').show(); // done
+          r.assignDrop($('.resumable-drop')[0]);
+          r.assignBrowse($('.resumable-browse')[0]);
+
+          // Handle file add event
+          r.on('fileAdded', function(file){
+              // Show progress pabr
+              $('.resumable-progress, .resumable-files, .resumable-list').show();
+              // Show pause, hide resume
+              $('.resumable-progress .progress-resume-link').hide();
+              $('.resumable-progress .progress-pause-link').show();
+              // Add the file to the list
+              $('.resumable-list tbody')
+                    .append('<tr>')
+                    .append('<td class="resumable-file-'+file.uniqueIdentifier+'">Uploading</td>')
+                    .append('<td class="resumable-file-name"></td>')
+                    //.append('<td class="resumable-file-description"><input type="text" name="description[]" id="tdescription"/></td>')            
+                    .append('<td class="resumable-file-progress"></td>')
+                    .append('</tr>');
+              $('.resumable-file-'+file.uniqueIdentifier+' + .resumable-file-name').html(file.fileName);
+              // Actually start the upload
+              r.upload();
+            });
+          r.on('pause', function(){
+              // Show resume, hide pause
+              $('.resumable-progress .progress-resume-link').show();
+              $('.resumable-progress .progress-pause-link').hide();
+            });
+          r.on('complete', function(){
+              // Hide pause/resume when the upload has completed
+              $('.resumable-progress .progress-resume-link, .resumable-progress .progress-pause-link').hide();
+            });
+          r.on('fileSuccess', function(file,message){
+              // Reflect that the file upload has completed
+              $('.resumable-file-'+file.uniqueIdentifier).html('');
+              //$('.resumable-file-'+file.uniqueIdentifier+' + .resumable-file-name + .resumable-file-description + .resumable-file-progress').html('<span class="glyphicon glyphicon-ok-sign"></span>');
+              $('.resumable-file-'+file.uniqueIdentifier+' + .resumable-file-name + .resumable-file-progress').html('<span class="glyphicon glyphicon-ok-sign"></span>');
+            });
+          r.on('fileError', function(file, message){
+              // Reflect that the file upload has resulted in error
+              $('.resumable-file-'+file.uniqueIdentifier+' + .resumable-file-name + .resumable-file-progress').html('<span class="glyphicon glyphicon-exclamation-sign"></span>');              
+              //'+message+')');
+              r.removeFile(file);
+              r.upload();
+            });
+          r.on('fileProgress', function(file){
+              // Handle progress for both the file and the overall upload
+              $('.resumable-file-'+file.uniqueIdentifier+' + .resumable-file-name + .resumable-file-progress').html(Math.floor(file.progress()*100) + '%');
+              $('.progress-bar').css({width:Math.floor(r.progress()*100) + '%'});
+            });
+            
+          function resume() {
+              // Show pause, hide resume
+              $('.resumable-progress .progress-resume-link').hide();
+              $('.resumable-progress .progress-pause-link').show();
+              r.upload();
+          }
+        }
+      </script>
+<%}%>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             
             <% if (ajaxProgress) { %>
                 <div id="progressBarArea" class="row">

@@ -1123,7 +1123,11 @@ public class ItemTag extends TagSupport
 
             						if (tb != null)
             						{
+<<<<<<< HEAD
                                                             if (authorizeService.authorizeActionBoolean(context, tb, Constants.READ))
+=======
+                                                            if (AuthorizeManager.authorizeActionBoolean(context, tb, Constants.READ))
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                                                             {
                                                                 String myPath = request.getContextPath()
                                                                     + "/retrieve/"

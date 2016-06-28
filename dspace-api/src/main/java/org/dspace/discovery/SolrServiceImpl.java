@@ -1421,9 +1421,16 @@ public class SolrServiceImpl implements SearchService, IndexingService {
 
         // New fields to weaken the dependence on handles, and allow for faster
         // list display
+<<<<<<< HEAD
         doc.addField("search.uniqueid", type+"-"+id);
         doc.addField(RESOURCE_TYPE_FIELD, Integer.toString(type));
         doc.addField(RESOURCE_ID_FIELD, id.toString());
+=======
+		doc.addField("search.uniqueid", type+"-"+id);
+        doc.addField(RESOURCE_TYPE_FIELD, Integer.toString(type));
+
+        doc.addField(RESOURCE_ID_FIELD, Integer.toString(id));
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
         // want to be able to search for handle, so use keyword
         // (not tokenized, but it is indexed)
@@ -1919,7 +1926,11 @@ public class SolrServiceImpl implements SearchService, IndexingService {
     protected DSpaceObject findDSpaceObject(Context context, SolrDocument doc) throws SQLException {
 
         Integer type = (Integer) doc.getFirstValue(RESOURCE_TYPE_FIELD);
+<<<<<<< HEAD
         UUID id = UUID.fromString((String) doc.getFirstValue(RESOURCE_ID_FIELD));
+=======
+        Integer id = (Integer) doc.getFirstValue(RESOURCE_ID_FIELD);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         String handle = (String) doc.getFirstValue(HANDLE_FIELD);
 
         if (type != null && id != null)
@@ -1995,7 +2006,11 @@ public class SolrServiceImpl implements SearchService, IndexingService {
             {
                 SolrDocument doc = (SolrDocument) iter.next();
 
+<<<<<<< HEAD
                 DSpaceObject o = contentServiceFactory.getDSpaceObjectService((Integer) doc.getFirstValue(RESOURCE_TYPE_FIELD)).find(context, UUID.fromString((String) doc.getFirstValue(RESOURCE_ID_FIELD)));
+=======
+                DSpaceObject o = DSpaceObject.find(context, (Integer) doc.getFirstValue(RESOURCE_TYPE_FIELD), (Integer) doc.getFirstValue(RESOURCE_ID_FIELD));
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
                 if (o != null)
                 {

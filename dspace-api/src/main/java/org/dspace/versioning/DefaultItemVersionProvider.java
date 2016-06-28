@@ -20,9 +20,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+<<<<<<< HEAD
 import org.apache.log4j.Logger;
 import org.dspace.authorize.ResourcePolicy;
 import org.dspace.versioning.service.VersioningService;
+=======
+import org.dspace.authorize.AuthorizeManager;
+import org.dspace.authorize.ResourcePolicy;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
 /**
  *
@@ -103,9 +108,15 @@ public class DefaultItemVersionProvider extends AbstractVersionProvider implemen
             // only to preserve customly set policies and embargos (which are
             // realized by custom policies with a start date).
             List<ResourcePolicy> policies = 
+<<<<<<< HEAD
                     authorizeService.findPoliciesByDSOAndType(c, previousItem, ResourcePolicy.TYPE_CUSTOM);
             authorizeService.addPolicies(c, policies, itemNew);
             itemService.update(c, itemNew);
+=======
+                    AuthorizeManager.findPoliciesByDSOAndType(c, previousItem, ResourcePolicy.TYPE_CUSTOM);
+            AuthorizeManager.addPolicies(c, policies, itemNew);
+            itemNew.update();
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             return itemNew;
         }catch (IOException | SQLException | AuthorizeException e) {
             throw new RuntimeException(e.getMessage(), e);

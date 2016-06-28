@@ -35,9 +35,14 @@
 <%@ page import="org.dspace.browse.BrowseIndex" %>
 <%@ page import="org.dspace.browse.ItemCounter" %>
 <%@ page import="org.dspace.content.*" %>
+<<<<<<< HEAD
 <%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.services.ConfigurationService" %>
 <%@ page import="org.dspace.services.factory.DSpaceServicesFactory" %>
+=======
+<%@ page import="org.dspace.core.ConfigurationManager" %>
+<%@ page import="org.dspace.core.Utils" %>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 <%@ page import="javax.servlet.jsp.jstl.fmt.LocaleSupport" %>
 
 <%
@@ -167,7 +172,14 @@
 			String displayTitle = "Untitled";
 			if (StringUtils.isNotBlank(title))
 			{
+<<<<<<< HEAD
 				displayTitle = Utils.addEntities(title);
+=======
+				if (dcv.length > 0)
+				{
+					displayTitle = Utils.addEntities(dcv[0].value);
+				}
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 			}
 			%>
 		    <div style="padding-bottom: 50px; min-height: 200px;" class="item <%= first?"active":""%>">

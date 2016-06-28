@@ -53,7 +53,12 @@ public class TestJAXBSchema {
                 Item.class,
                 MetadataEntry.class,
                 ResourcePolicy.class,
+<<<<<<< HEAD
                 Status.class
+=======
+                Status.class,
+                User.class
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                 );
         context.generateSchema(resolver);
 

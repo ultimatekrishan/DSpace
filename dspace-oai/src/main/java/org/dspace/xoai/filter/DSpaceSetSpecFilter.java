@@ -37,6 +37,49 @@ public class DSpaceSetSpecFilter extends DSpaceFilter
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public DatabaseFilterResult buildDatabaseQuery(Context context)
+    {
+        if (setSpec.startsWith("col_"))
+        {
+            try
+            {
+                DSpaceObject dso = handleResolver.resolve(setSpec.replace("col_", "").replace("_", "/"));
+		if(dso != null){
+	                return new DatabaseFilterResult(
+        	                "EXISTS (SELECT tmp.* FROM collection2item tmp WHERE tmp.resource_id=i.item_id AND collection_id = ?)",
+                        dso.getID());
+		}
+            }
+            catch (Exception ex)
+            {
+                log.error(ex.getMessage(), ex);
+            }
+        }
+        else if (setSpec.startsWith("com_"))
+        {
+            try
+            {
+                DSpaceObject dso = handleResolver.resolve(setSpec.replace("com_", "").replace("_", "/"));
+		if(dso != null){
+                	List<Integer> list = collectionsService.getAllSubCollections(dso.getID());
+	                String subCollections = StringUtils.join(list.iterator(), ",");
+        	        return new DatabaseFilterResult(
+                	        "EXISTS (SELECT tmp.* FROM collection2item tmp WHERE tmp.resource_id=i.item_id AND collection_id IN ("
+                                + subCollections + "))");
+		}
+            }
+            catch (Exception e)
+            {
+                log.error(e.getMessage(), e);
+            }
+        }
+        return new DatabaseFilterResult();
+    }
+
+    @Override
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
     public boolean isShown(DSpaceItem item)
     {
         for (ReferenceSet s : item.getSets())

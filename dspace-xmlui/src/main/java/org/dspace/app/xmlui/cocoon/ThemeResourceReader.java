@@ -15,8 +15,13 @@ import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.ResourceNotFoundException;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.environment.SourceResolver;
+<<<<<<< HEAD
 import org.dspace.services.ConfigurationService;
 import org.dspace.services.factory.DSpaceServicesFactory;
+=======
+import org.apache.commons.lang.StringUtils;
+import org.dspace.core.ConfigurationManager;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.xml.sax.SAXException;
 
 /**
@@ -31,7 +36,10 @@ public class ThemeResourceReader extends SafeResourceReader
 {
     // Default whitelist of file extensions that are allowed in an XMLUI theme
     protected String[] DEFAULT_WHITELIST = new String[]{"css", "js", "json", "gif", "jpg", "jpeg", "png", "ico", "bmp", "htm", "html", "svg", "ttf", "woff"};
+<<<<<<< HEAD
     protected ConfigurationService configurationService = DSpaceServicesFactory.getInstance().getConfigurationService();
+=======
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
     @Override
     public void setup(SourceResolver resolver, Map objectModel, String src, Parameters par)
@@ -46,13 +54,31 @@ public class ThemeResourceReader extends SafeResourceReader
         }
 
         // Otherwise, we'll load our configured file-extension whitelist
+<<<<<<< HEAD
         String[] whitelist = configurationService.getArrayProperty("xmlui.theme.whitelist", DEFAULT_WHITELIST);
+=======
+        String whitelistProp = ConfigurationManager.getProperty("xmlui.theme.whitelist");
+        String[] whitelist;
+
+        if(StringUtils.isEmpty(whitelistProp))
+        {
+            whitelist = DEFAULT_WHITELIST;
+        }
+        else
+        {
+            whitelist = whitelistProp.split(",");
+        }
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
         // Check resource suffix against our whitelist
         for(String suffix : whitelist)
         {
             // If it is in our whitelist, let it through to the SafeResourceReader
+<<<<<<< HEAD
             if(src != null && src.toLowerCase().endsWith("." + suffix))
+=======
+            if(src != null && src.toLowerCase().endsWith("." + suffix.trim()))
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             {
                 super.setup(resolver, objectModel, src, par);
                 return;

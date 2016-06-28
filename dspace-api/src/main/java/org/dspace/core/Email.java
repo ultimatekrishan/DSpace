@@ -476,7 +476,11 @@ public class Email
         System.out.println(" - To: " + to);
         System.out.println(" - Subject: " + subject);
         System.out.println(" - Server: " + server);
+<<<<<<< HEAD
         boolean disabled = config.getBooleanProperty("mail.server.disabled", false);
+=======
+        boolean disabled = ConfigurationManager.getBooleanProperty("mail.server.disabled", false);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         try
         {
             if( disabled)

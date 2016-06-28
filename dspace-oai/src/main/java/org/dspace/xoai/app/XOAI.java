@@ -177,6 +177,14 @@ public class XOAI {
                         + last.toString());
         // Index both in_archive items AND withdrawn items. Withdrawn items will be flagged withdrawn
         // (in order to notify external OAI harvesters of their new status)
+<<<<<<< HEAD
+=======
+        String sqlQuery = "SELECT item_id FROM item WHERE (in_archive=TRUE OR withdrawn=TRUE) AND discoverable=TRUE AND last_modified > ?";
+        if(DatabaseManager.isOracle()){
+                sqlQuery = "SELECT item_id FROM item WHERE (in_archive=1 OR withdrawn=1) AND discoverable=1 AND last_modified > ?";
+        }
+
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         try {
             Iterator<Item> iterator = itemService.findInArchiveOrWithdrawnDiscoverableModifiedSince(
                     context, last);
@@ -191,8 +199,18 @@ public class XOAI {
         try {
             // Index both in_archive items AND withdrawn items. Withdrawn items will be flagged withdrawn
             // (in order to notify external OAI harvesters of their new status)
+<<<<<<< HEAD
             Iterator<Item> iterator = itemService.findInArchiveOrWithdrawnDiscoverableModifiedSince(
                     context, null);
+=======
+            String sqlQuery = "SELECT item_id FROM item WHERE (in_archive=TRUE OR withdrawn=TRUE) AND discoverable=TRUE";
+            if(DatabaseManager.isOracle()){
+                sqlQuery = "SELECT item_id FROM item WHERE (in_archive=1 OR withdrawn=1) AND discoverable=1";
+            }
+
+            TableRowIterator iterator = DatabaseManager.query(context,
+                    sqlQuery);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             return this.index(iterator);
         } catch (SQLException ex) {
             throw new DSpaceSolrIndexerException(ex.getMessage(), ex);
@@ -281,7 +299,11 @@ public class XOAI {
         boolean pub = false;
         try {
             //Check if READ access allowed on this Item
+<<<<<<< HEAD
             pub = authorizeService.authorizeActionBoolean(context, item, Constants.READ);
+=======
+            pub = AuthorizeManager.authorizeActionBoolean(context, item, Constants.READ);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         } catch (SQLException ex) {
             log.error(ex.getMessage());
         }

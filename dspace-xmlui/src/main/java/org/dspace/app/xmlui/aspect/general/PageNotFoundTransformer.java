@@ -200,6 +200,7 @@ public class PageNotFoundTransformer extends AbstractDSpaceTransformer implement
         }
     }
 
+<<<<<<< HEAD
     /**
      * What page metadata to add to the document.
      *
@@ -210,6 +211,9 @@ public class PageNotFoundTransformer extends AbstractDSpaceTransformer implement
      * @throws java.io.IOException passed through.
      * @throws org.dspace.authorize.AuthorizeException passed through.
      */
+=======
+    /** What page metadata to add to the document */
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
     @Override
     public void addPageMeta(PageMeta pageMeta)
             throws SAXException, WingException, UIException, SQLException, IOException,

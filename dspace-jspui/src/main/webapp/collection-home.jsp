@@ -37,6 +37,11 @@
 <%@ page import="org.dspace.browse.BrowseInfo" %>
 <%@ page import="org.dspace.browse.ItemCounter"%>
 <%@ page import="org.dspace.content.*"%>
+<<<<<<< HEAD
+=======
+<%@ page import="org.dspace.core.ConfigurationManager"%>
+<%@ page import="org.dspace.core.Context" %>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 <%@ page import="org.dspace.core.Utils" %>
 <%@ page import="org.dspace.eperson.Group"     %>
 <%@ page import="org.dspace.services.ConfigurationService" %>
@@ -388,7 +393,11 @@
 			{
 				if (dcv.size() > 0)
 				{
+<<<<<<< HEAD
 					displayTitle = Utils.addEntities(dcv.get(0).getValue());
+=======
+					displayTitle = Utils.addEntities(dcv[0].value);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 				}
 			}
 			%><p class="recentItem"><a href="<%= request.getContextPath() %>/handle/<%= items.get(i).getHandle() %>"><%= displayTitle %></a></p><%

@@ -80,7 +80,11 @@ public class CommunityRecentSubmissions extends AbstractRecentSubmissionTransfor
 
             Community community = (Community) dso;
 
+<<<<<<< HEAD
             if (itemService.countItems(context, community) > maxRecentSubmissions)
+=======
+            if (community.countItems() > maxRecentSubmissions)
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                 addViewMoreLink(lastSubmittedDiv, dso);
         }
     }

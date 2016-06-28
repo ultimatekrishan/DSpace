@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" default-lazy-init="true">
@@ -58,10 +59,29 @@
     <bean class="org.dspace.core.LicenseServiceImpl"/>
     <bean class="org.dspace.core.NewsServiceImpl">
    		<property name="acceptableFilenames">
+=======
+<!--
+
+    The contents of this file are subject to the license and copyright
+    detailed in the LICENSE and NOTICE files at the root of the source
+    tree and available online at
+
+    http://www.dspace.org/license/
+
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" default-lazy-init="true">
+
+	<bean class="org.dspace.core.NewsServiceImpl"
+			id="org.dspace.core.service.NewsService">
+		<property name="acceptableFilenames">
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 			<list>
 				<value>news-top.html</value>
 				<value>news-side.html</value>
 			</list>
+<<<<<<< HEAD
 		</property>
 	</bean>
 
@@ -118,4 +138,9 @@
     <!--<bean class="org.dspace.xmlworkflow.WorkflowRequirementsServiceImpl"/>-->
     <!--<bean class="org.dspace.xmlworkflow.XmlWorkflowFactoryImpl"/>-->
 
+=======
+		</property>	
+	</bean>
+
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 </beans>

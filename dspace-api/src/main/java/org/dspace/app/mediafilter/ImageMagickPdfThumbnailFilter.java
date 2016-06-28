@@ -7,8 +7,11 @@
  */
 package org.dspace.app.mediafilter;
 
+<<<<<<< HEAD
 import org.dspace.content.Item;
 
+=======
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
@@ -24,8 +27,13 @@ public class ImageMagickPdfThumbnailFilter extends ImageMagickThumbnailFilter {
 	    File f3 = null;
 	    try
 	    {
+<<<<<<< HEAD
 		    f2 = getImageFile(f, 0, verbose);
 		    f3 = getThumbnailFile(f2, verbose);
+=======
+		    f2 = getImageFile(f, 0);
+		    f3 = getThumbnailFile(f2);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 		    byte[] bytes = Files.readAllBytes(f3.toPath());
 		    return new ByteArrayInputStream(bytes);
 	    }

@@ -10,7 +10,10 @@ package org.dspace.identifier;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Arrays;
+=======
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import java.util.List;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -262,7 +265,11 @@ public class DOIIdentifierProvider
             return;
         } 
                 
+<<<<<<< HEAD
         doiRow.setStatus(TO_BE_RESERVED);
+=======
+        doiRow.setColumn("status", TO_BE_RESERVED);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         try
         {
             doiService.update(context, doiRow);
@@ -361,11 +368,19 @@ public class DOIIdentifierProvider
         }
         else if (TO_BE_REGISTERED.equals(doiRow.getStatus()))
         {
+<<<<<<< HEAD
             doiRow.setStatus(UPDATE_BEFORE_REGISTRATION);
+=======
+            doiRow.setColumn("status", UPDATE_BEFORE_REGISTRATION);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         }
         else if (IS_RESERVED.equals(doiRow.getStatus()))
         {
+<<<<<<< HEAD
             doiRow.setStatus(UPDATE_RESERVED);
+=======
+            doiRow.setColumn("status", UPDATE_RESERVED);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         }
         else
         {
@@ -423,11 +438,19 @@ public class DOIIdentifierProvider
         {
             doiRow.setStatus(IS_REGISTERED);
         }
+<<<<<<< HEAD
         else if (UPDATE_BEFORE_REGISTRATION.equals(doiRow.getStatus()))
+=======
+        else if (UPDATE_BEFORE_REGISTRATION == doiRow.getIntColumn("status"))
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         {
             doiRow.setStatus(TO_BE_REGISTERED);
         }
+<<<<<<< HEAD
         else if (UPDATE_RESERVED.equals(doiRow.getStatus()))
+=======
+        else if (UPDATE_RESERVED == doiRow.getIntColumn("status"))
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         {
             doiRow.setStatus(IS_RESERVED);
         }

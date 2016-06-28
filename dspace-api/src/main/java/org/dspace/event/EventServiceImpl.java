@@ -282,9 +282,14 @@ public class EventServiceImpl implements EventService
             Context ctx = new Context();
 
             try {
+<<<<<<< HEAD:dspace-api/src/main/java/org/dspace/event/EventServiceImpl.java
                 Dispatcher dispatcher = pooledDispatcher.getObject();
 
                 for (Iterator ci = dispatcher.getConsumers()
+=======
+
+                for (Iterator ci = ((Dispatcher) dispatcher).getConsumers()
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4:dspace-api/src/main/java/org/dspace/event/EventManager.java
                         .iterator(); ci.hasNext();)
                 {
                     ConsumerProfile cp = (ConsumerProfile) ci.next();
@@ -293,6 +298,12 @@ public class EventServiceImpl implements EventService
                         cp.getConsumer().finish(ctx);
                     }
                 }
+<<<<<<< HEAD:dspace-api/src/main/java/org/dspace/event/EventServiceImpl.java
+=======
+
+                ctx.complete();
+
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4:dspace-api/src/main/java/org/dspace/event/EventManager.java
             } catch (Exception e) {
                 ctx.abort();
                 throw e;

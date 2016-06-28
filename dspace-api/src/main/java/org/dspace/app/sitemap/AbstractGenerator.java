@@ -74,7 +74,11 @@ public abstract class AbstractGenerator
     /**
      * Start writing a new sitemap file.
      *
+<<<<<<< HEAD
      * @throws IOException if IO error
+=======
+     * @throws IOException
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
      *             if an error occurs creating the file
      */
     protected void startNewFile() throws IOException
@@ -130,7 +134,11 @@ public abstract class AbstractGenerator
     /**
      * Finish with the current sitemap file.
      *
+<<<<<<< HEAD
      * @throws IOException if IO error
+=======
+     * @throws IOException
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
      *             if an error occurs writing
      */
     protected void closeCurrentFile() throws IOException
@@ -147,7 +155,11 @@ public abstract class AbstractGenerator
      *
      * @return number of sitemap files written.
      *
+<<<<<<< HEAD
      * @throws IOException if IO error
+=======
+     * @throws IOException
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
      *             if an error occurs writing
      */
     public int finish() throws IOException

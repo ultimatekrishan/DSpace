@@ -533,9 +533,14 @@ public class ItemsResource extends Resource
                         dspacePolicy.setStartDate(date);
                     }
 
+<<<<<<< HEAD
                     resourcePolicyService.update(context, dspacePolicy);
 
                     bitstreamService.updateLastModified(context, dspaceBitstream);
+=======
+                    dspacePolicy.update();
+                    dspaceBitstream.updateLastModified();
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                 }
             }
 
@@ -887,6 +892,13 @@ public class ItemsResource extends Resource
      * 
      * @param metadataEntry
      *            Metadata field to search by.
+<<<<<<< HEAD
+=======
+     * @param scheme
+     *            Scheme of metadata(key).
+     * @param value
+     *            Value of metadata field.
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
      * @param headers
      *            If you want to access the item as the user logged into context,
      *            header "rest-dspace-token" must be set to token value retrieved
@@ -926,12 +938,49 @@ public class ItemsResource extends Resource
         {
             context = createContext();
 
+<<<<<<< HEAD
             Iterator<org.dspace.content.Item> itemIterator = itemService.findByMetadataField(context, metadataEntry.getSchema(), metadataEntry.getElement(), metadataEntry.getQualifier(), metadataEntry.getValue());
+=======
+            String sql = "SELECT RESOURCE_ID, TEXT_VALUE, TEXT_LANG, SHORT_ID, ELEMENT, QUALIFIER " +
+                    "FROM METADATAVALUE " +
+                    "JOIN METADATAFIELDREGISTRY ON METADATAVALUE.METADATA_FIELD_ID = METADATAFIELDREGISTRY.METADATA_FIELD_ID " +
+                    "JOIN METADATASCHEMAREGISTRY ON METADATAFIELDREGISTRY.METADATA_SCHEMA_ID = METADATASCHEMAREGISTRY.METADATA_SCHEMA_ID " +
+                    "WHERE " +
+                    "SHORT_ID='" + metadata[0] + "'  AND " +
+                    "ELEMENT='" + metadata[1] + "' AND ";
+            if (metadata.length > 3)
+            {
+                sql += "QUALIFIER='" + metadata[2] + "' AND ";
+            }
+            if (org.dspace.storage.rdbms.DatabaseManager.isOracle())
+            {
+                sql += "dbms_lob.compare(TEXT_VALUE, '" + metadataEntry.getValue() + "') = 0 AND ";
+            }
+            else
+            {
+                sql += "TEXT_VALUE='" + metadataEntry.getValue() + "' AND ";
+            }
+            if (metadataEntry.getLanguage() != null)
+            {
+                sql += "TEXT_LANG='" + metadataEntry.getLanguage() + "'";
+            }
+            else
+            {
+                sql += "TEXT_LANG is null";
+            }
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
             while (itemIterator.hasNext())
             {
+<<<<<<< HEAD
                 org.dspace.content.Item dspaceItem = itemIterator.next();
                 Item item = new Item(dspaceItem, servletContext, expand, context);
+=======
+                TableRow row = iterator.next();
+                org.dspace.content.Item dspaceItem = this.findItem(context, row.getIntColumn("RESOURCE_ID"),
+                        org.dspace.core.Constants.READ);
+                Item item = new Item(dspaceItem, "", context);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                 writeStats(dspaceItem, UsageEvent.Action.VIEW, user_ip, user_agent, xforwardedfor, headers,
                         request, context);
                 items.add(item);

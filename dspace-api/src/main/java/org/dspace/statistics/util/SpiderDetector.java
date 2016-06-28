@@ -43,12 +43,19 @@ public class SpiderDetector {
     private static IPTable table = null;
 
     /** Collection of regular expressions to match known spiders' agents. */
+<<<<<<< HEAD
     private static final List<Pattern> agents
             = Collections.synchronizedList(new ArrayList<Pattern>());
 
     /** Collection of regular expressions to match known spiders' domain names. */
     private static final List<Pattern> domains
             = Collections.synchronizedList(new ArrayList<Pattern>());
+=======
+    private static List<Pattern> agents = Collections.synchronizedList(new ArrayList<Pattern>());
+
+    /** Collection of regular expressions to match known spiders' domain names. */
+    private static List<Pattern> domains = Collections.synchronizedList(new ArrayList<Pattern>());
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
     /**
      * Utility method which reads lines from a file & returns them in a Set.
@@ -203,7 +210,11 @@ public class SpiderDetector {
     {
         // See if any agent patterns match
         if (null != agent)
+<<<<<<< HEAD
         {
+=======
+        {   
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             synchronized(agents)
             {
                 if (agents.isEmpty())
@@ -236,7 +247,11 @@ public class SpiderDetector {
         // No.  See if any DNS names match
         if (null != hostname)
         {
+<<<<<<< HEAD
             synchronized(domains)
+=======
+            synchronized(domains) 
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             {
                 if (domains.isEmpty())
                     loadPatterns("domains", domains);

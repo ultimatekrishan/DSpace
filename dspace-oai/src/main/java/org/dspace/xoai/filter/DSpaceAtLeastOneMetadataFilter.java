@@ -8,6 +8,10 @@
 
 package org.dspace.xoai.filter;
 
+<<<<<<< HEAD
+=======
+import java.sql.SQLException;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import java.util.ArrayList;
 import java.util.List;
 

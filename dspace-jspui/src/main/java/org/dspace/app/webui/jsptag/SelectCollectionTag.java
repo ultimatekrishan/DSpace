@@ -58,7 +58,11 @@ public class SelectCollectionTag extends TagSupport
         {
             HttpServletRequest hrq = (HttpServletRequest) pageContext.getRequest();
             Context context = UIUtil.obtainContext(hrq);
+<<<<<<< HEAD
             List<Collection> collections = (List<Collection>) hrq.getAttribute("collections");
+=======
+            Collection[] collections = (Collection[]) hrq.getAttribute("collections");
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
             sb.append("<select");
             if (name != null)
@@ -84,7 +88,11 @@ public class SelectCollectionTag extends TagSupport
             for (Collection coll : collections)
             {
                 sb.append("<option value=\"").append(coll.getID()).append("\"");
+<<<<<<< HEAD
                 if (collection.equals(coll.getID().toString()))
+=======
+                if (collection == coll.getID())
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                 {
                     sb.append(" selected=\"selected\"");
                 }

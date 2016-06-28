@@ -83,7 +83,11 @@ public class Bitstream extends DSpaceObject {
         this.setCheckSum(checkSum);
 
         if(expandFields.contains("parent") || expandFields.contains("all")) {
+<<<<<<< HEAD
             parentObject = new DSpaceObject(bitstreamService.getParentObject(context, bitstream), servletContext);
+=======
+            parentObject = new DSpaceObject(bitstream.getParentObject());
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         } else {
             this.addExpand("parent");
         }

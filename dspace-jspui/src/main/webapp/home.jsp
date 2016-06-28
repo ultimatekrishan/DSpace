@@ -15,11 +15,14 @@
   -    recent.submissions - RecetSubmissions
   --%>
 
+<<<<<<< HEAD
 <%@page import="org.dspace.core.factory.CoreServiceFactory"%>
 <%@page import="org.dspace.core.service.NewsService"%>
 <%@page import="org.dspace.content.service.CommunityService"%>
 <%@page import="org.dspace.content.factory.ContentServiceFactory"%>
 <%@page import="org.dspace.content.service.ItemService"%>
+=======
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 <%@page import="org.dspace.core.Utils"%>
 <%@page import="org.dspace.content.Bitstream"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -126,12 +129,20 @@ if (submissions != null && submissions.count() > 0)
 		        String displayTitle = itemService.getMetadataFirstValue(item, "dc", "title", null, Item.ANY);
 		        if (displayTitle == null)
 		        {
+<<<<<<< HEAD
 		        	displayTitle = "Untitled";
+=======
+		            displayTitle = Utils.addEntities(dcv[0].value);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 		        }
 		        String displayAbstract = itemService.getMetadataFirstValue(item, "dc", "description", "abstract", Item.ANY);
 		        if (displayAbstract == null)
 		        {
+<<<<<<< HEAD
 		            displayAbstract = "";
+=======
+		            displayAbstract = Utils.addEntities(dcv[0].value);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 		        }
 		%>
 		    <div style="padding-bottom: 50px; min-height: 200px;" class="item <%= first?"active":""%>">

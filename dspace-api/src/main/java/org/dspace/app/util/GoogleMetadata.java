@@ -11,7 +11,12 @@ import java.sql.SQLException;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
+<<<<<<< HEAD
 import org.dspace.authorize.factory.AuthorizeServiceFactory;
+=======
+
+import org.dspace.authorize.AuthorizeManager;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.dspace.content.*;
 
 import java.io.IOException;
@@ -22,6 +27,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
 import org.apache.log4j.Logger;
 import org.dspace.content.factory.ContentServiceFactory;
 import org.dspace.content.service.ItemService;
@@ -31,12 +37,23 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map.Entry;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
 
 import org.dspace.handle.factory.HandleServiceFactory;
+=======
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.dspace.core.Constants;
+import org.dspace.core.Context;
+import org.dspace.handle.HandleManager;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.jdom.Element;
 
 /**
@@ -768,8 +785,13 @@ public class GoogleMetadata
      * Fetch retaining the order of the values for any given key in which they
      * where added (like authors).
      *
+<<<<<<< HEAD
      * Usage: {@code GoogleMetadata gmd = new GoogleMetadata(item); for(Entry<String,
      * String> mapping : googlemd.getMappings()) ...}
+=======
+     * Usage: GoogleMetadata gmd = new GoogleMetadata(item); for(Entry<String,
+     * String> mapping : googlemd.getMappings()) { ... }
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
      * 
      * @return Iterable of metadata fields mapped to Google-formatted values
      */
@@ -1051,6 +1073,7 @@ public class GoogleMetadata
 	 */
 	protected Bitstream findLinkableFulltext(Item item) throws SQLException {
 		Bitstream bestSoFar = null;
+<<<<<<< HEAD
 		int bitstreamCount = 0;
 		List<Bundle> contentBundles = itemService.getBundles(item, "ORIGINAL");
 		for (Bundle bundle : contentBundles) {
@@ -1067,6 +1090,26 @@ public class GoogleMetadata
                 }
             }
         }
+=======
+		Bundle[] contentBundles = item.getBundles("ORIGINAL");
+		for (Bundle bundle : contentBundles) {
+			int primaryBitstreamId = bundle.getPrimaryBitstreamID();
+			Bitstream[] bitstreams = bundle.getBitstreams();
+			for (Bitstream candidate : bitstreams) {
+				if (candidate.getID() == primaryBitstreamId) { // is primary -> use this one
+					if (isPublic(candidate)) {
+						return candidate;
+					}					
+				} else 
+					{
+						
+						if (bestSoFar == null && isPublic(candidate)) { //if bestSoFar is null but the candidate is not public you don't use it and try to find another
+						bestSoFar = candidate;
+						}					
+					}
+			}
+		}
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
 		return bestSoFar;
 	}

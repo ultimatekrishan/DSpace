@@ -32,7 +32,11 @@ import org.dspace.services.factory.DSpaceServicesFactory;
  * @author Adán Román Ruiz at arvo.es (bugfix)
  * @author Panagiotis Koutsourakis (National Documentation Centre) (bugfix)
  * @author Kostas Stamatis (National Documentation Centre) (bugfix)
+<<<<<<< HEAD
  *
+=======
+ * 
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
  */
 public class SolrBrowseDAO implements BrowseDAO
 {

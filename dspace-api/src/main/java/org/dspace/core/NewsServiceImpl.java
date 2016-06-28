@@ -5,6 +5,7 @@
  *
  * http://www.dspace.org/license/
  */
+<<<<<<< HEAD
 
 package org.dspace.core;
 
@@ -138,6 +139,21 @@ public class NewsServiceImpl implements NewsService
         return filePath;
     }
     
+=======
+package org.dspace.core;
+
+import java.util.List;
+
+import org.dspace.core.service.NewsService;
+
+public class NewsServiceImpl implements NewsService {
+	private List<String> acceptableFilenames;
+	
+	public void setAcceptableFilenames(List<String> acceptableFilenames) {
+		this.acceptableFilenames = acceptableFilenames;
+	}
+	
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 	@Override
 	public boolean validate(String newsName) {
 		if (acceptableFilenames != null) {
@@ -145,4 +161,8 @@ public class NewsServiceImpl implements NewsService
 		}
 		return false;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 }

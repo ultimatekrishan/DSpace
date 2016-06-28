@@ -12,6 +12,10 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.TreeMap;
+<<<<<<< HEAD
+=======
+import org.dspace.core.ConfigurationManager;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.dspace.servicemanager.DSpaceKernelImpl;
 import org.dspace.servicemanager.DSpaceKernelInit;
 import org.dspace.services.RequestService;

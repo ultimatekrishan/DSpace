@@ -3,7 +3,11 @@
     <groupId>org.dspace</groupId>
     <artifactId>dspace-rest</artifactId>
     <packaging>war</packaging>
+<<<<<<< HEAD
     <version>6.0-rc3-SNAPSHOT</version>
+=======
+    <version>5.6-SNAPSHOT</version>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
     <name>DSpace REST :: API and Implementation</name>
     <description>DSpace RESTful Web Services API</description>
     <url>http://demo.dspace.org</url>
@@ -11,7 +15,11 @@
     <parent>
         <groupId>org.dspace</groupId>
         <artifactId>dspace-parent</artifactId>
+<<<<<<< HEAD
         <version>6.0-rc3-SNAPSHOT</version>
+=======
+        <version>5.6-SNAPSHOT</version>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         <relativePath>..</relativePath>
     </parent>
 
@@ -51,6 +59,7 @@
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
+<<<<<<< HEAD
             <version>2.22.1</version>
         </dependency>
         <dependency>
@@ -69,12 +78,26 @@
                     <artifactId>jackson-annotations</artifactId>
                 </exclusion>
             </exclusions>
+=======
+            <version>1.19</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+            <version>1.19</version>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         </dependency>
 
         <dependency>
+<<<<<<< HEAD
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>2.5.4</version>
+=======
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.19</version>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         </dependency>
 
         <!-- Spring 3 dependencies -->
@@ -95,9 +118,15 @@
 		
         <!-- Jersey + Spring -->
         <dependency>
+<<<<<<< HEAD
             <groupId>org.glassfish.jersey.ext</groupId>
             <artifactId>jersey-spring3</artifactId>
             <version>2.22.1</version>
+=======
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-spring</artifactId>
+            <version>1.19</version>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>

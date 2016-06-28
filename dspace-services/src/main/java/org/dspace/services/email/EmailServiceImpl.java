@@ -100,11 +100,20 @@ public class EmailServiceImpl
                 props.put("mail.smtp.port", port);
             }
             // Set extra configuration properties
+<<<<<<< HEAD
             String[] extras = cfg.getArrayProperty("mail.extraproperties");
             if (extras != null)
             {
                 String key, value;
                 for (String argument : extras)
+=======
+            String extras = cfg.getProperty("mail.extraproperties");
+            if ((extras != null) && (!"".equals(extras.trim())))
+            {
+                String arguments[] = extras.split(",");
+                String key, value;
+                for (String argument : arguments)
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                 {
                     key = argument.substring(0, argument.indexOf('=')).trim();
                     value = argument.substring(argument.indexOf('=') + 1).trim();

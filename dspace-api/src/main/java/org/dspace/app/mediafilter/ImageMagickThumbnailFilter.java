@@ -36,9 +36,15 @@ import org.dspace.core.ConfigurationManager;
  */
 public abstract class ImageMagickThumbnailFilter extends MediaFilter implements SelfRegisterInputFormats
 {
+<<<<<<< HEAD
 	protected static int width = 180;
     protected static int height = 120;
 	private static boolean flatten = true;
+=======
+	private static int width = 180;
+	private static int height = 120;
+        private static boolean flatten = true;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 	static String bitstreamDescription = "IM Thumbnail";
 	static final String defaultPattern = "Generated Thumbnail";
 	static Pattern replaceRegex = Pattern.compile(defaultPattern);

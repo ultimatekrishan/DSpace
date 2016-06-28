@@ -20,8 +20,11 @@ import org.apache.excalibur.source.impl.validity.NOPValidity;
 import org.dspace.app.requestitem.RequestItem;
 import org.dspace.app.requestitem.RequestItemAuthor;
 import org.dspace.app.requestitem.RequestItemAuthorExtractor;
+<<<<<<< HEAD
 import org.dspace.app.requestitem.factory.RequestItemServiceFactory;
 import org.dspace.app.requestitem.service.RequestItemService;
+=======
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.dspace.app.xmlui.cocoon.AbstractDSpaceTransformer;
 import org.dspace.app.xmlui.utils.ContextUtil;
 import org.dspace.app.xmlui.utils.UIException;
@@ -37,9 +40,17 @@ import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.Item;
 import org.dspace.core.Context;
 import org.dspace.core.I18nUtil;
+<<<<<<< HEAD
 import org.dspace.handle.factory.HandleServiceFactory;
 import org.dspace.handle.service.HandleService;
 import org.dspace.services.factory.DSpaceServicesFactory;
+=======
+import org.dspace.eperson.EPerson;
+import org.dspace.handle.HandleManager;
+import org.dspace.storage.rdbms.DatabaseManager;
+import org.dspace.storage.rdbms.TableRow;
+import org.dspace.utils.DSpace;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.xml.sax.SAXException;
 
 /**
@@ -129,14 +140,23 @@ public class ItemRequestResponseTrueForm extends AbstractDSpaceTransformer imple
 		else
 			title = "untitled";
 		
+<<<<<<< HEAD
 		RequestItemAuthor author = DSpaceServicesFactory.getInstance().getServiceManager()
+=======
+		RequestItemAuthor author = new DSpace()
+				.getServiceManager()
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 				.getServiceByName(RequestItemAuthorExtractor.class.getName(),
 						RequestItemAuthorExtractor.class)
 				.getRequestItemAuthor(context, item);
 
 		Object[] args = new String[]{
 					requestItem.getReqName(), // User
+<<<<<<< HEAD
                     handleService.getCanonicalForm(item.getHandle()), // URL
+=======
+					HandleManager.getCanonicalForm(item.getHandle()), // URL
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 					title, // request item title
 					author.getFullName(),
 					author.getEmail()

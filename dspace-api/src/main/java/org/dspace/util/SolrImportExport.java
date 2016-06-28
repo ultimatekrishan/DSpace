@@ -32,6 +32,10 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.URL;
+<<<<<<< HEAD
+=======
+import java.nio.file.FileStore;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import java.text.*;
 import java.util.*;
 
@@ -42,6 +46,7 @@ import java.util.*;
 public class SolrImportExport
 {
 
+<<<<<<< HEAD
 	private static final ThreadLocal<DateFormat> SOLR_DATE_FORMAT;
 	private static final ThreadLocal<DateFormat> SOLR_DATE_FORMAT_NO_MS;
 	private static final ThreadLocal<DateFormat> EXPORT_DATE_FORMAT;
@@ -70,6 +75,16 @@ public class SolrImportExport
 				return simpleDateFormat;
 			}
 		};
+=======
+	private static final DateFormat SOLR_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+	private static final DateFormat SOLR_DATE_FORMAT_NO_MS = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+	private static final DateFormat EXPORT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM");
+
+	static
+	{
+		SOLR_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+		EXPORT_DATE_FORMAT.setTimeZone(TimeZone.getDefault());
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 	}
 
 	private static final String ACTION_OPTION = "a";
@@ -570,7 +585,11 @@ public class SolrImportExport
 		query.setRows(0);
 		query.setFacet(true);
 		query.add(FacetParams.FACET_RANGE, timeField);
+<<<<<<< HEAD
 		query.add(FacetParams.FACET_RANGE_START, SOLR_DATE_FORMAT.get().format(earliestTimestamp) + "/MONTH");
+=======
+		query.add(FacetParams.FACET_RANGE_START, SOLR_DATE_FORMAT.format(earliestTimestamp) + "/MONTH");
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 		query.add(FacetParams.FACET_RANGE_END, "NOW/MONTH+1MONTH");
 		query.add(FacetParams.FACET_RANGE_GAP, "+1MONTH");
 		query.setFacetMinCount(1);
@@ -582,7 +601,11 @@ public class SolrImportExport
 			String monthStart = monthFacet.getValue();
 			try
 			{
+<<<<<<< HEAD
 				monthStartDate = SOLR_DATE_FORMAT_NO_MS.get().parse(monthStart);
+=======
+				monthStartDate = SOLR_DATE_FORMAT_NO_MS.parse(monthStart);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 			}
 			catch (java.text.ParseException e)
 			{
@@ -642,7 +665,11 @@ public class SolrImportExport
 			// other acceptable value: a number, specifying how many days back to export
 			days = Integer.valueOf(lastValue); // TODO check value?
 		}
+<<<<<<< HEAD
 		return timeField + ":[NOW/DAY-" + days + "DAYS TO " + SOLR_DATE_FORMAT.get().format(new Date()) + "]";
+=======
+		return timeField + ":[NOW/DAY-" + days + "DAYS TO " + SOLR_DATE_FORMAT.format(new Date()) + "]";
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 	}
 
 	/**
@@ -677,7 +704,11 @@ public class SolrImportExport
 		}
 		return indexName
 				       + "_export_"
+<<<<<<< HEAD
 					   + EXPORT_DATE_FORMAT.get().format(exportStart)
+=======
+					   + EXPORT_DATE_FORMAT.format(exportStart)
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 					   + (StringUtils.isNotBlank(exportFileNumber) ? "_" + exportFileNumber : "")
 				       + ".csv";
 	}

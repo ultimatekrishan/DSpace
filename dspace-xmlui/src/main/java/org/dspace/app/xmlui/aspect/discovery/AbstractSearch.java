@@ -780,6 +780,7 @@ public abstract class AbstractSearch extends AbstractDSpaceTransformer implement
     public DiscoverQuery prepareQuery(DSpaceObject scope, String query, String[] fqs)
             throws UIException, SearchServiceException {
 
+<<<<<<< HEAD
     	this.queryArgs = new DiscoverQuery();
     	
     	int page = getParameterPage();
@@ -788,6 +789,17 @@ public abstract class AbstractSearch extends AbstractDSpaceTransformer implement
         query = DiscoveryUIUtils.escapeQueryChars(query);
 
     	List<String> filterQueries = new ArrayList<>();
+=======
+        if (queryResults != null)
+        {
+            return;
+        }
+
+        String query = getQuery();
+
+        // Escape any special characters in this user-entered query
+        query = DiscoveryUIUtils.escapeQueryChars(query);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
         if (fqs != null) {
             filterQueries.addAll(Arrays.asList(fqs));

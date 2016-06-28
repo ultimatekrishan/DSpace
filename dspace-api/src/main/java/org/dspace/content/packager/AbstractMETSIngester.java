@@ -31,10 +31,16 @@ import org.dspace.core.ConfigurationManager;
 import org.dspace.core.Constants;
 import org.dspace.core.Context;
 import org.dspace.core.LogManager;
+<<<<<<< HEAD
 import org.dspace.handle.factory.HandleServiceFactory;
 import org.dspace.handle.service.HandleService;
 import org.dspace.workflow.WorkflowException;
 import org.dspace.workflow.factory.WorkflowServiceFactory;
+=======
+import org.dspace.handle.HandleManager;
+import org.dspace.workflow.WorkflowItem;
+import org.dspace.xmlworkflow.storedcomponents.XmlWorkflowItem;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.jdom.Element;
 
 /**
@@ -669,6 +675,7 @@ public abstract class AbstractMETSIngester extends AbstractPackageIngester
             addBitstreams(context, item, manifest, pkgFile, params, callback);
 
             // have subclass manage license since it may be extra package file.
+<<<<<<< HEAD
             Collection owningCollection = (Collection) ContentServiceFactory.getInstance().getDSpaceObjectService(dso).getParentObject(context, dso);
             if(owningCollection == null)
             {
@@ -677,12 +684,31 @@ public abstract class AbstractMETSIngester extends AbstractPackageIngester
                 if(inProgressSubmission == null)
                 {
                     inProgressSubmission = WorkflowServiceFactory.getInstance().getWorkflowItemService().findByItem(context, item);
+=======
+            Collection owningCollection = (Collection) dso.getParentObject();
+            if(owningCollection == null)
+            {
+                //We are probably dealing with an item that isn't archived yet
+                InProgressSubmission inProgressSubmission = WorkspaceItem.findByItem(context, item);
+                if(inProgressSubmission == null)
+                {
+                    if (ConfigurationManager.getProperty("workflow", "workflow.framework").equals("xmlworkflow"))
+                    {
+                        inProgressSubmission = XmlWorkflowItem.findByItem(context, item);
+                    }else{
+                        inProgressSubmission = WorkflowItem.findByItem(context, item);
+                    }
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                 }
                 owningCollection = inProgressSubmission.getCollection();
             }
 
+<<<<<<< HEAD
             addLicense(context, item, license, owningCollection
                     , params);
+=======
+            addLicense(context, item, license, owningCollection, params);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
             // FIXME ?
             // should set lastModifiedTime e.g. when ingesting AIP.

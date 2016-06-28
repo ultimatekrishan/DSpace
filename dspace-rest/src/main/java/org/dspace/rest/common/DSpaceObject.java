@@ -8,8 +8,11 @@
 package org.dspace.rest.common;
 
 import org.atteo.evo.inflector.English;
+<<<<<<< HEAD
 import org.dspace.content.factory.ContentServiceFactory;
 import org.dspace.content.service.DSpaceObjectService;
+=======
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.dspace.rest.Resource;
 
 import javax.servlet.ServletContext;
@@ -72,7 +75,11 @@ public class DSpaceObject {
     }
 
     public String getLink() {
+<<<<<<< HEAD
         return link;
+=======
+        return Resource.getServletContextPath() + "/" + English.plural(getType()) + "/" + getId();
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
     }
 
     public String getType() {

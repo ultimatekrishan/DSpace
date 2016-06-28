@@ -13,6 +13,11 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+<<<<<<< HEAD
+=======
+import javax.xml.bind.annotation.XmlRootElement;
+
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 @XmlRootElement(name = "resourcepolicy")
 public class ResourcePolicy{
 	

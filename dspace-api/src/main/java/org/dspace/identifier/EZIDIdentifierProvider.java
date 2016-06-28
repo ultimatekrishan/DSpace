@@ -560,7 +560,11 @@ public class EZIDIdentifierProvider
     /**
      * Map selected DSpace metadata to fields recognized by DataCite.
      */
+<<<<<<< HEAD
     Map<String, String> crosswalkMetadata(Context context, DSpaceObject dso)
+=======
+    Map<String, String> crosswalkMetadata(DSpaceObject dso)
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
     {
         if ((null == dso) || !(dso instanceof Item))
         {
@@ -636,7 +640,11 @@ public class EZIDIdentifierProvider
         if (null == handle)
         {
             log.warn("{} #{} has no handle -- location not set.",
+<<<<<<< HEAD
                     contentServiceFactory.getDSpaceObjectService(dso).getTypeText(dso), dso.getID());
+=======
+                    dso.getTypeText(), dso.getID());
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         }
         else
         {
@@ -661,10 +669,13 @@ public class EZIDIdentifierProvider
         crosswalk = aCrosswalk;
     }
 
+<<<<<<< HEAD
     public Map<String, String> getCrosswalk() {
         return crosswalk;
     }
 
+=======
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
     /**
      * Provide a map from DSO metadata keys to classes which can transform their
      * values to something acceptable to EZID.

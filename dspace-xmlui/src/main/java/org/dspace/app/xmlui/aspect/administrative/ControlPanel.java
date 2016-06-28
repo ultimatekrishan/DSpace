@@ -136,6 +136,361 @@ public class ControlPanel extends AbstractDSpaceTransformer implements Serviceab
         Division div = body.addInteractiveDivision("control-panel", contextPath+"/admin/panel", Division.METHOD_POST, "primary administrative");
         div.setHead(T_head);
 
+<<<<<<< HEAD
+=======
+        // LIST: options
+        List options = div.addList("options",List.TYPE_SIMPLE,"horizontal");
+
+        // our options, selected or not....
+        if (option == OPTIONS.java)
+        {
+            options.addItem().addHighlight("bold").addXref("?java", T_option_java);
+        }
+        else
+        {
+            options.addItemXref("?java", T_option_java);
+        }
+
+        if (option == OPTIONS.dspace)
+        {
+            options.addItem().addHighlight("bold").addXref("?dspace", T_option_dspace);
+        }
+        else
+        {
+            options.addItemXref("?dspace", T_option_dspace);
+        }
+
+        if (option == OPTIONS.alerts)
+        {
+            options.addItem().addHighlight("bold").addXref("?alerts", T_option_alerts);
+        }
+        else
+        {
+            options.addItemXref("?alerts", T_option_alerts);
+        }
+
+        if (option == OPTIONS.harvest)
+        {
+            options.addItem().addHighlight("bold").addXref("?harvest", T_option_harvest);
+        }
+        else
+        {
+            options.addItemXref("?harvest", T_option_harvest);
+        }
+
+        String userSortTarget = "?activity";
+        if (request.getParameter("sortBy") != null)
+        {
+            userSortTarget += "&sortBy=" + request.getParameter("sortBy");
+        }
+        if (option == OPTIONS.activity)
+        {
+            options.addItem().addHighlight("bold").addXref(userSortTarget, "Current Activity");
+        }
+        else
+        {
+            options.addItemXref(userSortTarget, "Current Activity");
+        }
+
+
+        // The main content:
+        if (option == OPTIONS.java)
+        {
+            addJavaInformation(div);
+        }
+        else if (option == OPTIONS.dspace)
+        {
+            addDSpaceConfiguration(div);
+        }
+        else if (option == OPTIONS.alerts)
+        {
+            addAlerts(div);
+        }
+        else if (option == OPTIONS.activity)
+        {
+            addActivity(div);
+        }
+        else if (option == OPTIONS.harvest)
+        {
+            addHarvest(div);
+        }
+        else
+        {
+            div.addPara(T_select_panel);
+        }
+
+    }
+
+    /**
+     * Add specific java information including JRE, OS, and runtime memory statistics.
+     */
+    private void addJavaInformation(Division div) throws WingException
+    {
+        // Get memory statistics
+        int processors = Runtime.getRuntime().availableProcessors();
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        long totalMemory = Runtime.getRuntime().totalMemory();
+        long freeMemory = Runtime.getRuntime().freeMemory();
+        long usedMemory = totalMemory-freeMemory;
+        
+        // Convert bytes into MiB
+        maxMemory   = maxMemory   / 1024 / 1024;
+        totalMemory = totalMemory / 1024 / 1024;
+        usedMemory  = usedMemory  / 1024 / 1024;
+        freeMemory  = freeMemory  / 1024 / 1024;
+		
+        // LIST: Java
+        List list = div.addList("javaOs");
+        list.setHead(T_JAVA_HEAD);
+        list.addLabel(T_JAVA_VERSION);
+        list.addItem(System.getProperty("java.version"));
+        list.addLabel(T_JAVA_VENDOR);
+        list.addItem(System.getProperty("java.vm.name"));
+        list.addLabel(T_OS_NAME);
+        list.addItem(System.getProperty("os.name"));
+        list.addLabel(T_OS_ARCH);
+        list.addItem(System.getProperty("os.arch"));
+        list.addLabel(T_OS_VERSION);
+        list.addItem(System.getProperty("os.version"));
+		
+        // LIST: memory
+        List runtime = div.addList("runtime");
+        runtime.setHead(T_RUNTIME_HEAD);
+        runtime.addLabel(T_RUNTIME_PROCESSORS);
+        runtime.addItem(String.valueOf(processors));
+        runtime.addLabel(T_RUNTIME_MAX);
+        runtime.addItem(String.valueOf(maxMemory) + " MiB");
+        runtime.addLabel(T_RUNTIME_TOTAL);
+        runtime.addItem(String.valueOf(totalMemory) + " MiB");
+        runtime.addLabel(T_RUNTIME_USED);
+        runtime.addItem(String.valueOf(usedMemory) + " MiB");
+        runtime.addLabel(T_RUNTIME_FREE);
+        runtime.addItem(String.valueOf(freeMemory) + " MiB");
+        
+        //List: Cocoon Info & Cache
+        addCocoonInformation(div);
+    }
+
+    /**
+     * Add specific Cocoon information, especially related to the Cocoon Cache.
+     * <P>
+     * For more information about Cocoon Caches/Stores, see:
+     * http://wiki.apache.org/cocoon/StoreComponents  
+     */
+    private void addCocoonInformation(Division div) throws WingException
+    {
+        // List: Cocoon Info & Caches
+        List cocoon = div.addList("cocoon");
+        cocoon.setHead(T_COCOON_HEAD);
+        
+        cocoon.addLabel(T_COCOON_VERSION);
+        cocoon.addItem(org.apache.cocoon.Constants.VERSION);
+
+        // attempt to Display some basic info about Cocoon's Settings & Caches
+
+        // Get access to basic Cocoon Settings
+        if(this.settings!=null)
+        {
+            //Output Cocoon's Work Directory & Cache Directory
+            cocoon.addLabel(T_COCOON_WORK_DIR);
+            cocoon.addItem(this.settings.getWorkDirectory());
+            cocoon.addLabel(T_COCOON_CACHE_DIR);
+            cocoon.addItem(this.settings.getCacheDirectory());
+        }    
+
+        // Check if we have access to Cocoon's Default Cache
+        // Cocoon's Main (Default) Store is used to store objects that are serializable
+        if(this.storeDefault!=null)
+        {
+            // Store name is just the className (remove the package info though, just to save space)
+            String storeName = this.storeDefault.getClass().getName();
+            storeName = storeName.substring(storeName.lastIndexOf(".")+1); 
+
+            // display main store's cache info
+            cocoon.addLabel(T_COCOON_MAIN_CACHE_SIZE.parameterize(storeName + ", 0x" + Integer.toHexString(this.storeDefault.hashCode())));
+
+            // display cache size & link to clear Cocoon's main cache
+            Item defaultSize = cocoon.addItem();
+            defaultSize.addContent(String.valueOf(this.storeDefault.size()) + "  ");
+            defaultSize.addXref(contextPath + "/admin/panel?java=true&clearcache=true", T_COCOON_CACHE_CLEAR);
+        }
+
+        // Check if we have access to Cocoon's Persistent Cache
+        // Cocoon's Persistent Store may be used by the Default Cache/Store to delegate persistent storage
+        // (it's an optional store which may not exist)
+        if(this.storePersistent!=null)
+        {
+            // Store name is just the className (remove the package info though, just to save space)
+            String storeName = this.storeDefault.getClass().getName();
+            storeName = storeName.substring(storeName.lastIndexOf(".")+1);
+
+            // display persistent store's cache size info
+            cocoon.addLabel(T_COCOON_PERSISTENT_CACHE_SIZE.parameterize(storeName + ", 0x" + Integer.toHexString(this.storePersistent.hashCode())));
+            cocoon.addItem(String.valueOf(this.storePersistent.size()));
+        }
+
+        // Check if we have access to Cocoon's StoreJanitor
+        // The Store Janitor manages all of Cocoon's "transient caches/stores"
+        // These "transient" stores are used for non-serializable objects or objects whose
+        // storage doesn't make sense across a server restart. 
+        if(this.storeJanitor!=null)
+        {
+            // For each Cache Store in Cocoon's StoreJanitor
+            Iterator i = this.storeJanitor.iterator();
+            while(i.hasNext())
+            {
+                // get the Cache Store
+                Store store = (Store) i.next();
+
+                // Store name is just the className (remove the package info though, just to save space)
+                String storeName = store.getClass().getName();
+                storeName = storeName.substring(storeName.lastIndexOf(".")+1); 
+
+                // display its size information
+                cocoon.addLabel(T_COCOON_TRANS_CACHE_SIZE.parameterize(storeName + ", 0x" + Integer.toHexString(store.hashCode())));
+                cocoon.addItem(String.valueOf(store.size()));
+            }
+        }
+    }
+
+    private static final String T_UNSET = "UNSET";
+
+    /**
+     * Guarantee a non-null String.
+     *
+     * @param value candidate string.
+     * @return {@code value} or a constant indicating an unset value.
+     */
+    private static String notempty(String value) { return (null == value || "".equals(value)) ? T_UNSET : value; }
+
+    /**
+     * List important DSpace configuration parameters.
+     */
+    private void addDSpaceConfiguration(Division div) throws WingException 
+    {
+
+        // LIST: DSpace
+        List dspace = div.addList("dspace");
+        dspace.setHead(T_DSPACE_HEAD);
+
+        dspace.addLabel(T_DSPACE_VERSION);
+        dspace.addItem(Util.getSourceVersion());
+
+        dspace.addLabel(T_DSPACE_DIR);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("dspace.dir")));
+
+        dspace.addLabel(T_DSPACE_URL);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("dspace.url")));
+
+        dspace.addLabel(T_DSPACE_HOST_NAME);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("dspace.hostname")));
+
+        dspace.addLabel(T_DSPACE_NAME);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("dspace.name")));
+
+        dspace.addLabel(T_DB_NAME);
+        dspace.addItem(notempty(DatabaseManager.getDbName()));
+
+        dspace.addLabel(T_DB_URL);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("db.url")));
+
+        dspace.addLabel(T_DB_DRIVER);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("db.driver")));
+
+        dspace.addLabel(T_DB_MAX_CONN);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("db.maxconnections")));
+
+        dspace.addLabel(T_DB_MAX_WAIT);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("db.maxwait")));
+
+        dspace.addLabel(T_DB_MAX_IDLE);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("db.maxidle")));
+
+       	dspace.addLabel(T_MAIL_SERVER);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("mail.server")));
+
+        dspace.addLabel(T_MAIL_FROM_ADDRESS);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("mail.from.address")));
+
+        dspace.addLabel(T_FEEDBACK_RECIPIENT);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("feedback.recipient")));
+
+        dspace.addLabel(T_MAIL_ADMIN);
+        dspace.addItem(notempty(ConfigurationManager.getProperty("mail.admin")));
+    }
+
+    /**
+     * Add a section that allows administrators to activate or deactivate system-wide alerts.
+     */
+    private void addAlerts(Division div) throws WingException 
+    {
+        // Remember we're in the alerts section
+        div.addHidden("alerts").setValue("true");
+
+        List form = div.addList("system-wide-alerts",List.TYPE_FORM);
+        form.setHead(T_alerts_head);
+
+        form.addItem(T_alerts_warning);
+
+        TextArea message = form.addItem().addTextArea("message");
+        message.setAutofocus("autofocus");
+        message.setLabel(T_alerts_message_label);
+        message.setSize(5, 45);
+        if (SystemwideAlerts.getMessage() == null)
+        {
+            message.setValue(T_alerts_message_default);
+        }
+        else
+        {
+            message.setValue(SystemwideAlerts.getMessage());
+        }
+		
+        Select countdown = form.addItem().addSelect("countdown");
+        countdown.setLabel(T_alerts_countdown_label);
+
+        countdown.addOption(0,T_alerts_countdown_none);
+        countdown.addOption(5,T_alerts_countdown_5);
+        countdown.addOption(15,T_alerts_countdown_15);
+        countdown.addOption(30,T_alerts_countdown_30);
+        countdown.addOption(60,T_alerts_countdown_60);
+
+        // Is there a current countdown active?
+        if (SystemwideAlerts.isAlertActive() && SystemwideAlerts.getCountDownToo() - System.currentTimeMillis() > 0)
+        {
+            countdown.addOption(true, -1, T_alerts_countdown_keep);
+        }
+        else
+        {
+            countdown.setOptionSelected(0);
+        }
+		
+        Select restrictsessions = form.addItem().addSelect("restrictsessions");
+        restrictsessions.setLabel(T_alerts_session_label);
+        restrictsessions.addOption(SystemwideAlerts.STATE_ALL_SESSIONS,T_alerts_session_all_sessions);
+        restrictsessions.addOption(SystemwideAlerts.STATE_CURRENT_SESSIONS,T_alerts_session_current_sessions);
+        restrictsessions.addOption(SystemwideAlerts.STATE_ONLY_ADMINISTRATIVE_SESSIONS,T_alerts_session_only_administrative);
+        restrictsessions.setOptionSelected(SystemwideAlerts.getRestrictSessions());
+
+        form.addItem(T_alerts_session_note);
+
+
+        Item actions = form.addItem();
+        actions.addButton("submit_activate").setValue(T_alerts_submit_activate);
+        actions.addButton("submit_deactivate").setValue(T_alerts_submit_deactivate);
+		
+    }
+	
+    /** The possible sorting parameters */
+    private static enum EventSort { TIME, URL, SESSION, AGENT, IP };
+	
+    /**
+     * Create a list of all activity.
+     */
+    private void addActivity(Division div) throws WingException, SQLException 
+    {
+		
+        // 0) Update recording settings
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         Request request = ObjectModelHelper.getRequest(objectModel);
         String selected_tab = "";
 

@@ -49,7 +49,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class Resource
 {
 
+<<<<<<< HEAD
     @javax.ws.rs.core.Context public ServletContext servletContext;
+=======
+    @javax.ws.rs.core.Context public static ServletContext servletContext;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
     private static Logger log = Logger.getLogger(Resource.class);
 
@@ -59,6 +63,9 @@ public class Resource
         writeStatistics = DSpaceServicesFactory.getInstance().getConfigurationService().getBooleanProperty("rest.stats", false);
     }
 
+    static public String getServletContextPath() {
+        return servletContext.getContextPath();
+    }
     /**
      * Create context to work with DSpace database. It can create context
      * with or without a logged in user (parameter user is null). Throws

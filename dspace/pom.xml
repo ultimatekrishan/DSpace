@@ -15,7 +15,11 @@
     <parent>
         <groupId>org.dspace</groupId>
         <artifactId>dspace-parent</artifactId>
+<<<<<<< HEAD
         <version>6.0-rc3-SNAPSHOT</version>
+=======
+        <version>5.6-SNAPSHOT</version>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         <relativePath>..</relativePath>
     </parent>
 

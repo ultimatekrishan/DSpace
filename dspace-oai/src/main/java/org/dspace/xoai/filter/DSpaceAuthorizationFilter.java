@@ -9,11 +9,20 @@
 package org.dspace.xoai.filter;
 
 import java.sql.SQLException;
+<<<<<<< HEAD
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.dspace.authorize.factory.AuthorizeServiceFactory;
 import org.dspace.authorize.service.AuthorizeService;
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.dspace.authorize.AuthorizeManager;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.dspace.content.Item;
 import org.dspace.core.Constants;
 import org.dspace.handle.factory.HandleServiceFactory;
@@ -27,10 +36,14 @@ import org.dspace.xoai.filter.results.SolrFilterResult;
  */
 public class DSpaceAuthorizationFilter extends DSpaceFilter
 {
+<<<<<<< HEAD
     private static final Logger log = LogManager.getLogger(DSpaceAuthorizationFilter.class);
 
     private static final AuthorizeService authorizeService
             = AuthorizeServiceFactory.getInstance().getAuthorizeService();
+=======
+    private static Logger log = LogManager.getLogger(DSpaceAuthorizationFilter.class);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
     private static final HandleService handleService
             = HandleServiceFactory.getInstance().getHandleService();
@@ -45,12 +58,20 @@ public class DSpaceAuthorizationFilter extends DSpaceFilter
             String handle = DSpaceItem.parseHandle(item.getIdentifier());
             if (handle == null)
                 return false;
+<<<<<<< HEAD
             Item dspaceItem = (Item) handleService.resolveToObject(context, handle);
+=======
+            Item dspaceItem = (Item) HandleManager.resolveToObject(context, handle);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             if (dspaceItem == null)
                 return false;
 
             // Check if READ access allowed on Item
+<<<<<<< HEAD
             pub = authorizeService.authorizeActionBoolean(context, dspaceItem, Constants.READ);
+=======
+            pub = AuthorizeManager.authorizeActionBoolean(context, dspaceItem, Constants.READ);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         }
         catch (SQLException ex)
         {

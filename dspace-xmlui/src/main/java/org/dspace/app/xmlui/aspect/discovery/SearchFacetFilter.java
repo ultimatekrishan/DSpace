@@ -83,9 +83,12 @@ public class SearchFacetFilter extends AbstractDSpaceTransformer implements Cach
     private static final Message T_go = message("xmlui.general.go");
     private static final Message T_rpp = message("xmlui.Discovery.AbstractSearch.rpp");
     private static final int[] RESULTS_PER_PAGE_PROGRESSION = {5, 10, 20, 40, 60, 80, 100};
+<<<<<<< HEAD
 
     protected HandleService handleService = HandleServiceFactory.getInstance().getHandleService();
 
+=======
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
     public SearchFacetFilter() {
 
@@ -235,9 +238,15 @@ public class SearchFacetFilter extends AbstractDSpaceTransformer implements Cach
         SORT requestSortOrder = getSortOrder(request);
         if(request.getParameter(SearchFilterParam.STARTS_WITH) != null)
         {
+<<<<<<< HEAD
             discoverFacetField = new DiscoverFacetField(facetField, DiscoveryConfigurationParameters.TYPE_TEXT, getPageSize() + 1, requestSortOrder, request.getParameter(SearchFilterParam.STARTS_WITH).toLowerCase());
         }else{
             discoverFacetField = new DiscoverFacetField(facetField, DiscoveryConfigurationParameters.TYPE_TEXT, getPageSize() + 1, requestSortOrder);
+=======
+            discoverFacetField = new DiscoverFacetField(facetField, DiscoveryConfigurationParameters.TYPE_TEXT, getPageSize() + 1, DiscoveryConfigurationParameters.SORT.VALUE, request.getParameter(SearchFilterParam.STARTS_WITH).toLowerCase());
+        }else{
+            discoverFacetField = new DiscoverFacetField(facetField, DiscoveryConfigurationParameters.TYPE_TEXT, getPageSize() + 1, DiscoveryConfigurationParameters.SORT.VALUE);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         }
 
         queryArgs.addFacetField(discoverFacetField);
@@ -303,7 +312,10 @@ public class SearchFacetFilter extends AbstractDSpaceTransformer implements Cach
         div.setHead(message("xmlui.Discovery.AbstractSearch.type_" + browseParams.getFacetField()));
         if(getSortOrder(request).equals(SORT.VALUE)){
         addBrowseJumpNavigation(div, browseParams, request);
+<<<<<<< HEAD
         }
+=======
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
         addBrowseControls(div, browseParams);
 
         // Set up the major variables
@@ -486,11 +498,18 @@ public class SearchFacetFilter extends AbstractDSpaceTransformer implements Cach
             offSet = currentOffset;
         }
 
+<<<<<<< HEAD
         Map<String, String> urlParameters = new HashMap<>();
         urlParameters.putAll(browseParams.getCommonBrowseParams());
         urlParameters.putAll(browseParams.getControlParameters());
         urlParameters.put(SearchFilterParam.OFFSET, String.valueOf(offSet + getPageSize()));
         urlParameters.put(SearchFilterParam.ORDER, getSortOrder(request).name());
+=======
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.putAll(browseParams.getCommonBrowseParams());
+        parameters.putAll(browseParams.getControlParameters());
+        parameters.put(SearchFilterParam.OFFSET, String.valueOf(offSet + getPageSize()));
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
         // Add the filter queries
         String newURL = generateURL("search-filter", urlParameters);
@@ -513,12 +532,20 @@ public class SearchFacetFilter extends AbstractDSpaceTransformer implements Cach
             return null;
         }
 
+<<<<<<< HEAD
         Map<String, String> urlParameters = new HashMap<>();
         urlParameters.putAll(browseParams.getCommonBrowseParams());
         urlParameters.putAll(browseParams.getControlParameters());
         urlParameters.put(SearchFilterParam.ORDER, getSortOrder(request).name());
         String offSet = String.valueOf((currentOffset - getPageSize()<0)? 0:currentOffset - getPageSize());
         urlParameters.put(SearchFilterParam.OFFSET, offSet);
+=======
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.putAll(browseParams.getCommonBrowseParams());
+        parameters.putAll(browseParams.getControlParameters());
+        String offSet = String.valueOf((currentOffset - getPageSize()<0)? 0:currentOffset - getPageSize());
+        parameters.put(SearchFilterParam.OFFSET, offSet);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
         // Add the filter queries
         String newURL = generateURL("search-filter", urlParameters);
@@ -646,7 +673,11 @@ public class SearchFacetFilter extends AbstractDSpaceTransformer implements Cach
             throws WingException
     {
         // Prepare a Map of query parameters required for all links
+<<<<<<< HEAD
         Map<String, String> queryParams = new HashMap<>();
+=======
+        Map<String, String> queryParams = new HashMap<String, String>();
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
         queryParams.putAll(params.getCommonBrowseParams());
         Request request = ObjectModelHelper.getRequest(objectModel);

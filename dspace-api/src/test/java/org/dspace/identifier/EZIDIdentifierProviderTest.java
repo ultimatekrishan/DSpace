@@ -10,11 +10,18 @@ package org.dspace.identifier;
 
 import java.io.IOException;
 import java.sql.SQLException;
+<<<<<<< HEAD
 import java.util.List;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+=======
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.dspace.AbstractUnitTest;
 import org.dspace.authorize.AuthorizeException;
 import org.dspace.content.*;
@@ -26,6 +33,10 @@ import org.dspace.content.service.WorkspaceItemService;
 import org.dspace.core.Context;
 import org.dspace.identifier.ezid.DateToYear;
 import org.dspace.identifier.ezid.Transform;
+<<<<<<< HEAD
+=======
+import org.dspace.kernel.ServiceManager;
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 import org.dspace.services.ConfigurationService;
 import org.dspace.services.factory.DSpaceServicesFactory;
 import org.dspace.workflow.WorkflowException;
@@ -80,8 +91,16 @@ public class EZIDIdentifierProviderTest
 
     private void dumpMetadata(Item eyetem)
     {
+<<<<<<< HEAD
         List<MetadataValue> metadata = itemService.getMetadata(eyetem, "dc", Item.ANY, Item.ANY, Item.ANY);
         for (MetadataValue metadatum : metadata)
+=======
+        if (null == eyetem)
+            return;
+
+        Metadatum[] metadata = eyetem.getMetadata("dc", Item.ANY, Item.ANY, Item.ANY);
+        for (Metadatum metadatum : metadata)
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
             System.out.printf("Metadata:  %s.%s.%s(%s) = %s\n",
                     metadatum.getMetadataField().getMetadataSchema().getName(),
                     metadatum.getMetadataField().getElement(),
@@ -126,8 +145,13 @@ public class EZIDIdentifierProviderTest
     public static void setUpClass()
             throws Exception
     {
+<<<<<<< HEAD
         // Find the configuration service
         config = DSpaceServicesFactory.getInstance().getConfigurationService();
+=======
+        // Find the usual kernel services
+        config = kernelImpl.getConfigurationService();
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
         // Configure the service under test.
         config.setProperty(EZIDIdentifierProvider.CFG_SHOULDER, TEST_SHOULDER);
@@ -160,6 +184,7 @@ public class EZIDIdentifierProviderTest
         context.turnOffAuthorisationSystem();
 
         // Create an environment for our test objects to live in.
+<<<<<<< HEAD
         community = communityService.create(community, context);
         communityService.setMetadata(context, community, "name", "A Test Community");
         communityService.update(context, community);
@@ -167,6 +192,17 @@ public class EZIDIdentifierProviderTest
         collection = collectionService.create(context, community);
         collectionService.setMetadata(context, collection, "name", "A Test Collection");
         collectionService.update(context, collection);
+=======
+        community = Community.create(null, context);
+        community.setMetadata("name", "A Test Community");
+        community.update();
+
+        collection = community.createCollection();
+        collection.setMetadata("name", "A Test Collection");
+        collection.update();
+
+        context.commit();
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
     }
 
     @After
@@ -175,7 +211,11 @@ public class EZIDIdentifierProviderTest
     {
         context.restoreAuthSystemState();
 
+<<<<<<< HEAD
         dumpMetadata(item);
+=======
+        dumpMetadata(Item.find(context, itemID));
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
     }
 
     /**
@@ -186,7 +226,11 @@ public class EZIDIdentifierProviderTest
     {
         System.out.println("supports Class");
 
+<<<<<<< HEAD
         EZIDIdentifierProvider instance = DSpaceServicesFactory.getInstance().getServiceManager().getServiceByName(EZIDIdentifierProvider.class.getName(), EZIDIdentifierProvider.class);
+=======
+        EZIDIdentifierProvider instance = new EZIDIdentifierProvider();
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
         Class<? extends Identifier> identifier = DOI.class;
         boolean result = instance.supports(identifier);
@@ -201,7 +245,11 @@ public class EZIDIdentifierProviderTest
     {
         System.out.println("supports String");
 
+<<<<<<< HEAD
         EZIDIdentifierProvider instance = DSpaceServicesFactory.getInstance().getServiceManager().getServiceByName(EZIDIdentifierProvider.class.getName(), EZIDIdentifierProvider.class);
+=======
+        EZIDIdentifierProvider instance = new EZIDIdentifierProvider();
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
         String identifier = "doi:" + TEST_SHOULDER;
         boolean result = instance.supports(identifier);
@@ -403,7 +451,11 @@ public class EZIDIdentifierProviderTest
 
     /**
      * Test of crosswalkMetadata method, of class EZIDIdentifierProvider.
+<<<<<<< HEAD
      * @throws Exception if error
+=======
+     * @throws Exception
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
      */
     @Test
     public void testCrosswalkMetadata()
@@ -412,17 +464,28 @@ public class EZIDIdentifierProviderTest
         System.out.println("crosswalkMetadata");
 
         // Set up the instance to be tested
+<<<<<<< HEAD
         EZIDIdentifierProvider instance = DSpaceServicesFactory.getInstance().getServiceManager().getServiceByName(EZIDIdentifierProvider.class.getName(), EZIDIdentifierProvider.class);
 //        instance.setConfigurationService(config);
 //        instance.setCrosswalk(aCrosswalk);
 //        instance.setCrosswalkTransform(crosswalkTransforms);
+=======
+        EZIDIdentifierProvider instance = new EZIDIdentifierProvider();
+        instance.setConfigurationService(config);
+        instance.setCrosswalk(aCrosswalk);
+        instance.setCrosswalkTransform(crosswalkTransforms);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
         // Let's have a fresh Item to work with
         DSpaceObject dso = newItem(context);
         String handle = dso.getHandle();
 
         // Test!
+<<<<<<< HEAD
         Map<String, String> metadata = instance.crosswalkMetadata(context, dso);
+=======
+        Map<String, String> metadata = instance.crosswalkMetadata(dso);
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
         // Evaluate
         String target = (String) metadata.get("_target");

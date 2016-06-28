@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+<<<<<<< HEAD
     <groupId>org.dspace</groupId>
     <artifactId>modules</artifactId>
     <packaging>pom</packaging>
@@ -14,6 +15,14 @@
         <version>6.0-rc3-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
+=======
+	<parent>
+		<groupId>org.dspace</groupId>
+		<artifactId>dspace-parent</artifactId>
+		<version>5.6-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
     <properties>
         <!-- This is the path to the root [dspace-src] directory. -->

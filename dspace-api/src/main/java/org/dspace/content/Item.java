@@ -58,9 +58,23 @@ public class Item extends DSpaceObject implements DSpaceObjectLegacySupport
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModified = new Date();
 
+<<<<<<< HEAD
     @ManyToOne(fetch = FetchType.LAZY, cascade={CascadeType.PERSIST})
     @JoinColumn(name = "owning_collection")
     private Collection owningCollection;
+=======
+        String query = "SELECT item.* FROM metadatavalue,item WHERE item.in_archive='1' " +
+                "AND item.item_id = metadatavalue.resource_id AND metadatavalue.resource_type_id=2 AND metadata_field_id = ?";
+        TableRowIterator rows = null;
+        if (Item.ANY.equals(authority)) {
+            rows = DatabaseManager.queryTable(context, "item", query, mdf.getFieldID());
+        } else {
+            query += " AND metadatavalue.authority = ?";
+            rows = DatabaseManager.queryTable(context, "item", query, mdf.getFieldID(), authority);
+        }
+        return new ItemIterator(context, rows);
+    }
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "template")
     private Collection templateItemOf;

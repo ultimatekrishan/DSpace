@@ -79,7 +79,11 @@ public class CollectionRecentSubmissions extends AbstractRecentSubmissionTransfo
                 }
             }
 
+<<<<<<< HEAD
             if (itemService.countItems(context, collection) > maxRecentSubmissions)
+=======
+            if (collection.countItems() > maxRecentSubmissions)
+>>>>>>> 88ed833e2cd8f0852b8c8f1f2fa5e419ea70b1a4
                 addViewMoreLink(lastSubmittedDiv, collection);
         }
     }
